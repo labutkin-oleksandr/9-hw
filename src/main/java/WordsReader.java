@@ -2,6 +2,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,9 @@ public class WordsReader {
                 int count = salaries.containsKey(word) ? salaries.get(word) + 1 : 1;
                 salaries.put(word, count);
             }
-            salaries.forEach((k,v) -> System.out.println(k + " " + v));
+            salaries.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .forEach(System.out::println);
         }
     }
